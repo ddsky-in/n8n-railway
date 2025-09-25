@@ -1,9 +1,7 @@
-    FROM n8nio/n8n:latest # Or a specific version like n8nio/n8n:1.93.0
+FROM n8nio/n8n:latest
 
-    USER root
-    RUN apt-get update && apt-get install -y \
-        ffmpeg \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+USER root
+RUN apk update && apk add --no-cache ffmpeg
+USER node
 
-    USER node
+CMD ["n8n"]
