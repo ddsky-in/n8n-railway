@@ -4,4 +4,4 @@ USER root
 RUN apk add --no-cache ffmpeg
 USER node
 
-CMD ["tini", "--", "n8n"]
+CMD ["n8n"]
