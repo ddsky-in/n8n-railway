@@ -1,10 +1,9 @@
-# Use Debian-based n8n image
-FROM n8nio/n8n:1.73.1-debian
+FROM n8nio/n8n:latest
 
 USER root
-RUN apt-get update && \
-    apt-get install -y ffmpeg python3 python3-pip && \
-    pip3 install yt-dlp && \
-    rm -rf /var/lib/apt/lists/*
+
+# Install ffmpeg, python3, pip, then yt-dlp
+RUN apk add --no-cache ffmpeg python3 py3-pip && \
+    pip3 install --no-cache-dir yt-dlp
 
 USER node
