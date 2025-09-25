@@ -1,14 +1,11 @@
-# Start from the official n8n image
-FROM n8nio/n8n:latest
+FROM n8nio/n8n:1.65.1
 
-# Switch to root to install ffmpeg
 USER root
-
-# Install ffmpeg
 RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Switch back to the node user (important for n8n to run correctly)
+# Add ffmpeg explicitly to PATH
+ENV PATH="/usr/bin:${PATH}"
+
 USER node
 
-# Start n8n
 CMD ["n8n"]
