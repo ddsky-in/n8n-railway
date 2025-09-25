@@ -1,4 +1,5 @@
-FROM n8nio/n8n:latest
+# Use Debian-based n8n image
+FROM n8nio/n8n:1.73.1-debian
 
 USER root
 RUN apt-get update && \
