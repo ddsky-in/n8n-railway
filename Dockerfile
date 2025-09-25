@@ -1,16 +1,9 @@
-# Use Debian-based n8n image
-FROM n8nio/n8n:latest-debian
+    FROM n8nio/n8n:latest # Or a specific version like n8nio/n8n:1.93.0
 
-USER root
+    USER root
+    RUN apt-get update && apt-get install -y \
+        ffmpeg \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
-# Because default Debian base might be old/EOL, use archive repos
-RUN sed -i 's|deb.debian.org|archive.debian.org|g' /etc/apt/sources.list \
-  && sed -i '/security.debian.org/d' /etc/apt/sources.list \
-  && apt-get update \
-  && apt-get install -y ffmpeg curl wget \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
-USER node
-
-CMD ["n8n"]
+    USER node
