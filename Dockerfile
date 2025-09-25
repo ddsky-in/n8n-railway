@@ -1,7 +1,7 @@
-FROM n8nio/n8n:1.65.1
+FROM n8nio/n8n:1.112.5
 
 USER root
-RUN apk update && apk add --no-cache ffmpeg
+RUN apk add --no-cache ffmpeg
 USER node
 
-CMD ["n8n"]
+CMD ["tini", "--", "n8n"]
